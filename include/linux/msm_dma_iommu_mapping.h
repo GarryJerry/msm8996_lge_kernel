@@ -18,6 +18,11 @@
 #include <linux/scatterlist.h>
 #include <linux/dma-mapping.h>
 
+struct msm_iommu_data {
+	struct list_head map_list;
+	struct mutex lock;
+};
+
 #ifdef CONFIG_IOMMU_API
 /*
 * This function is not taking a reference to the dma_buf here. It is expected

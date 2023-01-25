@@ -172,6 +172,12 @@ CONFIG_NOP_USB_XCEIV=y
 # otg wakelock enabled on tone
 CONFIG_USB_OTG_WAKELOCK=y
 
+# Enable Flatmem (slightly lower RAM usage at runtime)
+CONFIG_ARCH_FLATMEM_ENABLE=y
+CONFIG_FLATMEM_MANUAL=y
+CONFIG_FLATMEM=y
+CONFIG_FLAT_NODE_MEM_MAP=y
+
 # KCAL Control
 CONFIG_FB_MSM_MDSS_KCAL_CTRL=y
 

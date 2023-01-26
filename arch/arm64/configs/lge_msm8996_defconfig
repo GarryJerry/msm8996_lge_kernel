@@ -153,5 +153,14 @@ CONFIG_MSM_CAMERA_DEBUG=n
 # Work around some camera issues specific to LGE on 4.4
 CONFIG_LGE_ISP_CMD_WORKAROUND_FOR_44=y
 
+# Enable additional optimized crypto routines backported from 4.9 and 4.14
+CONFIG_CRYPTO_CHACHA20POLY1305=y
+CONFIG_CRYPTO_POLY1305=y
+CONFIG_CRYPTO_CHACHA20=y
+CONFIG_CRYPTO_SHA256_ARM64=y
+CONFIG_CRYPTO_SHA512_ARM64=y
+CONFIG_CRYPTO_CRC32_ARM64_CE=y
+CONFIG_CRYPTO_CHACHA20_NEON=y
+
 # Swan2000 has override priority
 include swan2000_config

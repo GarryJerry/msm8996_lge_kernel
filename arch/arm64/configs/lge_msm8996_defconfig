@@ -165,3 +165,9 @@ CONFIG_CRYPTO_CHACHA20_NEON=y
 
 # Swan2000 has override priority
 include swan2000_config
+# OTG Wakelock is enabled on sony's tone platform, and our USB stack is based on theirs
+CONFIG_USB_OTG_WAKELOCK=y
+
+# UID Stats
+CONFIG_UID_SYS_STATS=y
+

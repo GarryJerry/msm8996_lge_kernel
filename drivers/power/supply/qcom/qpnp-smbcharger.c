@@ -501,7 +501,7 @@ module_param_named(
 	int, 00600
 );
 
-#ifdef CONFIG_QPNP_SMBCHARGER_EXTENSION
+#if defined (CONFIG_QPNP_SMBCHARGER_EXTENSION) && !defined(CONFIG_MACH_LGE)
 static int smbchg_default_hvdcp_icl_ma = 1700;
 #else
 static int smbchg_default_hvdcp_icl_ma = 1800;
@@ -517,7 +517,7 @@ module_param_named(
 	int, 00600
 );
 
-#ifdef CONFIG_QPNP_SMBCHARGER_EXTENSION
+#if defined (CONFIG_QPNP_SMBCHARGER_EXTENSION) && !defined(CONFIG_MACH_LGE)
 static int smbchg_default_dcp_icl_ma = 1500;
 #else
 static int smbchg_default_dcp_icl_ma = 1800;

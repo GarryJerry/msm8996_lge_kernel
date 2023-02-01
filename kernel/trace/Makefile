@@ -2,6 +2,7 @@
 # We are fully aware of the dangers of __builtin_return_address()
 FRAME_CFLAGS := $(call cc-disable-warning,frame-address)
 KBUILD_CFLAGS += $(FRAME_CFLAGS)
+KBUILD_CFLAGS += -Wno-int-in-bool-context
 
 # Do not instrument the tracer itself:
 

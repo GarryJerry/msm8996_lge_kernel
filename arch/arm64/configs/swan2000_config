@@ -139,11 +139,11 @@ CONFIG_DM_VERITY=n
 
 # ONLY WHEN KERNEL IS DEEMED STABLE: Disable frame pointers, kallsyms, tracing
 # and kernel debug to maximize kernel performance (basically invert those below)
-CONFIG_FRAME_POINTER=y
-CONFIG_KALLSYMS=y
-CONFIG_DEBUG_KERNEL=y
-CONFIG_TRACING=y
-CONFIG_DISABLE_TRACE_PRINTK=n
+CONFIG_FRAME_POINTER=n
+CONFIG_KALLSYMS=n
+CONFIG_DEBUG_KERNEL=n
+CONFIG_TRACING=n
+CONFIG_DISABLE_TRACE_PRINTK=y
 
 
 
@@ -204,10 +204,10 @@ CONFIG_LD_DEAD_CODE_DATA_ELIMINATION=y
 CONFIG_OPTIMIZE_INLINING=y
 
 # Enable Ramoops Support while the kernel is still in debug phase
-CONFIG_PSTORE=y
-CONFIG_PSTORE_CONSOLE=y
-CONFIG_PSTORE_PMSG=y
-CONFIG_PSTORE_RAM=y
+CONFIG_PSTORE=n
+CONFIG_PSTORE_CONSOLE=n
+CONFIG_PSTORE_PMSG=n
+CONFIG_PSTORE_RAM=n
 
 # Enable configs for zram support and faster de/compression
 CONFIG_ZRAM=y
@@ -215,7 +215,7 @@ CONFIG_ZSMALLOC=y
 CONFIG_CRYPTO_LZ4=y
 
 # Set localversion as Swan2000
-CONFIG_LOCALVERSION="-Swan2K"
+CONFIG_LOCALVERSION="-Swan2K+ksu"
 
 # Enable USB fast charge (only works on Swan2000)
 CONFIG_FORCE_FAST_CHARGE=y

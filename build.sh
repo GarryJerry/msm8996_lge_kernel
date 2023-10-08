@@ -86,8 +86,8 @@ VER=$(cat $RDIR/$VFIL)
 # ------------------------- BUILD CONFIG OPTIONS -------------------------
 #
 # "user"@"host"
-KBUSER=stendro_+_AShiningRay
-KBHOST=github
+KBUSER=mick
+KBHOST=archvm
 
 # ccache: yes or no
 USE_CCACHE=no

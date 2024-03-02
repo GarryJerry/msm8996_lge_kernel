@@ -28,9 +28,7 @@
 
 #include "sync.h"
 
-#define CREATE_TRACE_POINTS
 #define SYNC_DUMP_TIME_LIMIT 7000
-#include "trace/sync.h"
 
 static const struct fence_ops android_fence_ops;
 static const struct file_operations sync_fence_fops;
@@ -50,7 +48,9 @@ struct sync_timeline *sync_timeline_create(const struct sync_timeline_ops *ops,
 	kref_init(&obj->kref);
 	obj->ops = ops;
 	obj->context = fence_context_alloc(1);
+#ifdef CONFIG_SYNC_DEBUG
 	strlcpy(obj->name, name, sizeof(obj->name));
+#endif
 
 	INIT_LIST_HEAD(&obj->child_list_head);
 	INIT_LIST_HEAD(&obj->active_list_head);
@@ -108,8 +108,6 @@ void sync_timeline_signal(struct sync_timeline *obj)
 	LIST_HEAD(signaled_pts);
 	struct sync_pt *pt, *next;
 
-	trace_sync_timeline(obj);
-
 	spin_lock_irqsave(&obj->child_list_lock, flags);
 
 	list_for_each_entry_safe(pt, next, &obj->active_list_head,
@@ -165,7 +163,9 @@ static struct sync_fence *sync_fence_alloc(int size, const char *name)
 		goto err;
 
 	kref_init(&fence->kref);
+#ifdef CONFIG_SYNC_DEBUG
 	strlcpy(fence->name, name, sizeof(fence->name));
+#endif
 
 	init_waitqueue_head(&fence->wq);
 
@@ -372,20 +372,15 @@ EXPORT_SYMBOL(sync_fence_cancel_async);
 int sync_fence_wait(struct sync_fence *fence, long timeout)
 {
 	long ret;
-	int i;
 
 	if (timeout < 0)
 		timeout = MAX_SCHEDULE_TIMEOUT;
 	else
 		timeout = msecs_to_jiffies(timeout);
 
-	trace_sync_wait(fence, 1);
-	for (i = 0; i < fence->num_fences; ++i)
-		trace_sync_pt(fence->cbs[i].sync_pt);
 	ret = wait_event_interruptible_timeout(fence->wq,
 					       atomic_read(&fence->status) <= 0,
 					       timeout);
-	trace_sync_wait(fence, 0);
 
 	if (ret < 0) {
 		return ret;
@@ -677,7 +672,9 @@ static long sync_fence_ioctl_fence_info(struct sync_fence *fence,
 	if (size > 4096)
 		size = 4096;
 
+#ifdef CONFIG_SYNC_DEBUG
 	strlcpy(data->name, fence->name, sizeof(data->name));
+#endif
 	data->status = atomic_read(&fence->status);
 	if (data->status >= 0)
 		data->status = !data->status;

@@ -21,7 +21,7 @@
 
 &pmi8994_charger {
 	qcom,fastchg-current-ma = <3000>;
-	somc,usb-9v-current-max = <1900>;
+	somc,usb-9v-current-max = <3000>;
 	somc,fastchg-hot-threshold = <430>;
 	somc,fastchg-warm-threshold = <400>;
 	somc,fastchg-cool-threshold = <100>;
